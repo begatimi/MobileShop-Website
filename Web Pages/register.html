@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html manifest="cache.appcache">
+<head>
+<style>
+	html,body {
+	width: 90%;
+	height: auto;
+	padding: 0;
+	margin: 0;}
+	</style>
+<title>Mobile Shop</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Mobile Shop">
+	<meta name="keywords" content="Apple,Iphone 4,5,6,7,8,X,Samsung S3,S4,S5,S6,S7,S8,LG,HTC,Charger,Phone Case,Accessories ">
+	<meta name="Author" content="Begatim Lekaj,Drinor Ahmeti,Ardit Lajqi,Endrit Hoti">
+	<link href="https://fonts.googleapis.com/css?family=Lato|Source+Sans+Pro" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="jquery-3.2.1.min.js"></script>
+	<style>
+		font-family: 'Lato', sans-serif;
+        font-family: 'Source Sans Pro', sans-serif;
+	</style>
+	<link rel="stylesheet" type="text/css" href="../CSS/register.css">
+	
+	<style>
+#div1, #div2 {
+    float: left;
+    width: 100px;
+    height: 105px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+</style>
+	</head>
+	<body>
+<!--~~~~~~~~~~~~~~~~~~~~~~~Header~~~~~~~~~~~~~~~~~~~~-->
+	<header>
+		<div id="login_menu">
+			<p><a href="login.html"><span class="login-btn">Login</span></a> | <a href="register.html"><span class="login-btn">Register</span></a></p>
+		</div>
+		<a href="Index.html"><img id="logo" src="../Images/logoooo.png" alt="logo" /></a>
+		
+	</header>
+	
+	<!--~~~~~~~~~~~~~~~~~~~~MENU~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<nav>
+		<div id="menudiv">
+			<ul>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="Index.html">Home</a></li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li> <a href="#">Apple</a>
+					<ul>
+						<li><a href="#">Phone</a>
+							<ul>
+								<li><a href="apple_phone_iphone _5_5s.html">Iphone 5/5s</a></li>
+								<li><a href="apple_phone_iphone _6_6s.html">Iphone 6/6s</a></li>
+								<li><a href="apple_phone_iphone _7_8.html">Iphone 7/8</a></li>
+								<li><a href="apple_phone_iphone _x.html">Iphone X</a></li>
+							</ul>
+						</li>
+						<li> <a href="apple_charger.html">Charger</a> </li>
+						<li> <a href="apple_accessories.html">Accessories</a></li>
+						<li> <a href="apple_phone_case.html">Phone Case</a> </li>
+					</ul>
+				</li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="#">Samsung</a>
+					<ul>
+						<li><a href="#">Phone</a>
+							<ul> 
+							
+							<li><a href="Samsung_S5_S6.html">Samsung S5/S6</a></li>
+							<li><a href="Samsung_S7_S8.html">Samsung S7/S8</a> </li>
+							<li><a href="Samsung_Note.html">Samsung Note</a></li>
+							</ul>
+						</li>
+						<li><a href="samsung_charger.html">Charger</a></li>
+						<li><a href="samsung_accessories.html">Accessories</a></li>
+						<li><a href="samsung_phone_case.html">Phone Case</a></li>
+					</ul>
+				</li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="#">HTC</a>
+					<ul>
+						<li><a href="htc_phone.html">Phone</a></li>
+						<li><a href="htc_charger.html">Charger</a></li>
+						<li><a href="htc_accessories.html">Accessories</a></li>
+						<li><a href="htc_phone_case.html">Phone Case</a></li>
+					</ul>
+				</li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="Compare.html">Compare</a>
+					<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+					<li><a href="black_friday.html">Black Friday</a></li>
+				</li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="contact.html">Contact</a></li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="around_us.html">About Us</a></li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				
+			</ul>
+		</div>
+	</nav>
+	<div id="content">
+		<!--- Validation froms -->
+		<script>
+			function validateForm() {
+				// Validate Name, Email, Password
+				var array = ["name","email","password"];
+				
+				for(var i = 0; i<array.length; i++) {
+					var x = document.forms["register_form"][array[i]].value;
+					if (x == "") {
+						alert(array[i] + " must be filled out!");
+						jumpTo(array[i]);
+						return false;
+					}
+				}
+				
+				// Validate checkbox
+				var elementRequired = document.querySelectorAll(".checkbox")
+				var elementChecked = 0;
+				for (var i = 0; i < elementRequired.length; i++) {
+						if(elementRequired[i].checked)
+							elementChecked++;
+				}
+				if(elementChecked == 0) {
+					alert("Please check at least check one checkbox!");
+					jumpTo("interest");
+					return false;
+				}
+				
+				// Radio Validate
+				var radio = document.getElementsByName("user_age");
+				if( radio[0].checked != true && radio[1].checked != true ) {
+					alert("Please choose your age!");
+					jumpTo("age");
+					return false;
+				}
+					
+				function jumpTo(anchor){
+					window.location.href = "#"+anchor;
+				}
+			}
+		</script>
+		<!-- form has 'autocomplete' turn on -->
+		<form name="register_form" action="register.php" method="post" onsubmit="return validateForm()" autocomplete="on">
+			<img src="../Images/signup.png" id="sign_up_icon" alt="sign up" style="display: none;"/>
+			<fieldset>
+				<legend><span class="number">1</span>Basic data</legend>
+				<label for="name">Name:</label>
+				<!-- Name has 'autofocus' -->
+				<input type="text" id="name" name="user_name" autofocus>
+				<!-- Users can add 'multiple' e-mail's -->
+				<label for="email" multiple>Email:</label>
+				<input type="email" id="email" name="user_email">
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="user_password" autocomplete="off">
+				<label id="age">Age:</label>
+				<input type="radio" id="under_13" value="under_13" name="user_age">
+				<label for="under_13" class="light">Under 18</label>
+				<br>
+				<input type="radio" id="over_13" value="over_13" name="user_age">
+				<label for="over_13" class="light">18 or older</label>
+			</fieldset>
+			<fieldset>
+			
+				<label for="bio">About you:</label>
+				<!-- Biography does 'not' require to be 'validated', 'height' and 'width' attributes -->
+				<textarea id="bio" name="user_bio" novalidate height="100" width="200"></textarea>
+			</fieldset>
+			<fieldset>
+				<label for="job">Job Role:</label>
+				<select id="job" name="user_job">
+					<optgroup label="Web">
+					   <option value="web_designer">Web Designer</option>
+					   <option value="php_developor">PHP Developer</option>
+						<option value="python_developer">Python Developer</option>
+						<option value="frontend_developer">Front-End Developer</option>
+						<option value="rails_developer"> Rails Developer</option>
+						
+						
+					</optgroup>
+					<optgroup label="Mobile">
+						<option value="Android_developer">Mobile Designer</option>
+						<option value="iOS_developer">iOS Developer</option>
+						<option value="mobile_designer">Androild Developer</option>
+						<option value="mobile_Creation">Mobile Creation Softwere</option>
+					</optgroup>
+					<optgroup label="Other">
+					    <option value="webmarketing">Web Marketing Strategist </option>
+						<option value="secretary">Secretary</option>
+						
+						
+					</optgroup>
+				</select>
+				<label id="interest">Interests:</label>
+				<input type="checkbox" id="development" value="interest_development" name="interests" class="checkbox">
+				<label class="light" for="development">Web Development</label>
+				<br>
+				<input type="checkbox" id="design" value="interest_design" name="interests" class="checkbox">
+				<label class="light" for="design">Softwere Development</label>
+				<br>
+				<input type="checkbox" id="business" value="interest_business" name="interests" class="checkbox">
+				<label class="light" for="business">Disign</label>
+				<br>
+				<input type="checkbox" id="business" value="interest_business" name="interests" class="checkbox">
+				<label class="light" for="business">Data Analysis</label>
+			</fieldset>
+			
+			<!--perdorimi i pulles sabmit -->
+			<button type="submit">Sign Up</button>
+			
+		</form>
+			<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+</script>
+			<p>Drag the image.</p>
+			<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+			<img src="../Images/X.jpg" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="80">
+			</div>
+			<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+	</div>
+	<!--~~~~~~~~~~~~~~~Footer~~~~~~~~~~~~~~~~~-->
+	<footer>
+		<div id="footer_bottom">
+			<p>Copyright &copy; Mobile Shop. Designated trademarks and brands are the property of their respective owners.<span id="date"></span></p>
+		<script>
+			document.getElementById("date").innerHTML = Date();
+			getElementById(this.update.bind(this), 1000);
+		</script>
+		</div>
+	</footer>
+</body>
+</html>

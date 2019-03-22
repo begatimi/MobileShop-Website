@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html manifest="cache.appcache">
+<head>
+<style>
+	html,body {
+	width: 90%;
+	height: auto;
+	padding: 0;
+	margin: 0;}
+	</style>
+<title>Mobile Shop</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Mobile Shop">
+	<meta name="keywords" content="Apple,Iphone 4,5,6,7,8,X,Samsung S3,S4,S5,S6,S7,S8,LG,HTC,Charger,Phone Case,Accessories ">
+	<meta name="Author" content="Begatim Lekaj,Drinor Ahmeti,Ardit Lajqi,Endrit Hoti">
+	<link href="https://fonts.googleapis.com/css?family=Lato|Source+Sans+Pro" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="jquery-3.2.1.min.js"></script>
+	<style>
+		font-family: 'Lato', sans-serif;
+        font-family: 'Source Sans Pro', sans-serif;
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="../JQuery/fade.js"></script>
+	<link rel="stylesheet" type="text/css" href="../CSS/contact.css">
+	<style>
+			p.dotted {border-style: dotted;}
+			p.dashed {border-style: dashed;}
+			p.dashed {border-radius: 10px;}
+			p.dashed {text-align: center;}
+	#grad1 {
+    height: 40px;
+    width: 400px;
+    background: radial-gradient(gray, gray, black);
+	text-align:center;
+}
+</style>
+<!--HTML GAMEE-->
+<script>
+var Game      = Game      || {};
+var Keyboard  = Keyboard  || {}; 
+var Component = Component || {};
+
+/**
+ * Keyboard Map
+ */
+Keyboard.Keymap = {
+  37: 'left',
+  38: 'up',
+  39: 'right',
+  40: 'down'
+};
+
+/**
+ * Keyboard Events
+ */
+Keyboard.ControllerEvents = function() {
+  
+  // Setts
+  var self      = this;
+  this.pressKey = null;
+  this.keymap   = Keyboard.Keymap;
+  
+  // Keydown Event
+  document.onkeydown = function(event) {
+    self.pressKey = event.which;
+  };
+  
+  // Get Key
+  this.getKey = function() {
+    return this.keymap[this.pressKey];
+  };
+};
+
+/**
+ * Game Component Stage
+ */
+Component.Stage = function(canvas, conf) {  
+  
+  // Sets
+  this.keyEvent  = new Keyboard.ControllerEvents();
+  this.width     = canvas.width;
+  this.height    = canvas.height;
+  this.length    = [];
+  this.food      = {};
+  this.score     = 0;
+  this.direction = 'right';
+  this.conf      = {
+    cw   : 10,
+    size : 5,
+    fps  : 1000
+  };
+  
+  // Merge Conf
+  if (typeof conf == 'object') {
+    for (var key in conf) {
+      if (conf.hasOwnProperty(key)) {
+        this.conf[key] = conf[key];
+      }
+    }
+  }
+  
+};
+
+/**
+ * Game Component Snake
+ */
+Component.Snake = function(canvas, conf) {
+  
+  // Game Stage
+  this.stage = new Component.Stage(canvas, conf);
+  
+  // Init Snake
+  this.initSnake = function() {
+    
+    // Itaration in Snake Conf Size
+    for (var i = 0; i < this.stage.conf.size; i++) {
+      
+      // Add Snake Cells
+      this.stage.length.push({x: i, y:0});
+		}
+	};
+  
+  // Call init Snake
+  this.initSnake();
+  
+  // Init Food  
+  this.initFood = function() {
+		
+    // Add food on stage
+    this.stage.food = {
+			x: Math.round(Math.random() * (this.stage.width - this.stage.conf.cw) / this.stage.conf.cw), 
+			y: Math.round(Math.random() * (this.stage.height - this.stage.conf.cw) / this.stage.conf.cw), 
+		};
+	};
+  
+  // Init Food
+  this.initFood();
+  
+  // Restart Stage
+  this.restart = function() {
+    this.stage.length            = [];
+    this.stage.food              = {};
+    this.stage.score             = 0;
+    this.stage.direction         = 'right';
+    this.stage.keyEvent.pressKey = null;
+    this.initSnake();
+    this.initFood();
+	alert("Sorry,you are lost!");
+	
+  };
+};
+
+/**
+ * Game Draw
+ */
+Game.Draw = function(context, snake) {
+  
+  // Draw Stage
+  this.drawStage = function() {
+    
+    // Check Keypress And Set Stage direction
+    var keyPress = snake.stage.keyEvent.getKey(); 
+    if (typeof(keyPress) != 'defined') {
+      snake.stage.direction = keyPress;
+    }
+    
+    // Draw White Stage
+		context.fillStyle = "white";
+		context.fillRect(0, 0, snake.stage.width, snake.stage.height);
+		
+    // Snake Position
+    var nx = snake.stage.length[0].x;
+		var ny = snake.stage.length[0].y;
+		
+    // Add position by stage direction
+    switch (snake.stage.direction) {
+      case 'right':
+        nx++;
+        break;
+      case 'left':
+        nx--;
+        break;
+      case 'up':
+        ny--;
+        break;
+      case 'down':
+        ny++;
+        break;
+    }
+    
+    // Check Collision
+    if (this.collision(nx, ny) == true) {
+	  snake.restart();
+	  alert("ju kini fituar")
+      return;
+    }
+    
+    // Logic of Snake food
+    if (nx == snake.stage.food.x && ny == snake.stage.food.y) {
+      var tail = {x: nx, y: ny};
+      snake.stage.score++;
+      snake.initFood();
+    } else {
+      var tail = snake.stage.length;
+      tail.x   = nx;
+      tail.y   = ny;	
+    }
+    snake.stage.length.unshift(tail);
+    
+    // Draw Snake
+    for (var i = 0; i < snake.stage.length.length; i++) {
+      var cell = snake.stage.length[i];
+      this.drawCell(cell.x, cell.y);
+    }
+    
+    // Draw Food
+    this.drawCell(snake.stage.food.x, snake.stage.food.y);
+    
+    // Draw Score
+    context.fillText('Score: ' + snake.stage.score, 5, (snake.stage.height - 5));
+  };
+  
+  // Draw Cell
+  this.drawCell = function(x, y) {
+    context.fillStyle = 'rgb(170, 170, 170)';
+    context.beginPath();
+    context.arc((x * snake.stage.conf.cw + 6), (y * snake.stage.conf.cw + 6), 4, 0, 2*Math.PI, false);    
+    context.fill();
+  };
+  
+  // Check Collision with walls
+  this.collision = function(nx, ny) {  
+    if (nx == -1 || nx == (snake.stage.width / snake.stage.conf.cw) || ny == -1 || ny == (snake.stage.height / snake.stage.conf.cw)) {
+      return true;
+    }
+    return false;    
+	}
+};
+
+
+/**
+ * Game Snake
+ */
+Game.Snake = function(elementId, conf) {
+  
+  // Sets
+  var canvas   = document.getElementById(elementId);
+  var context  = canvas.getContext("2d");
+  var snake    = new Component.Snake(canvas, conf);
+  var gameDraw = new Game.Draw(context, snake);
+  
+  // Game Interval
+  setInterval(function() {gameDraw.drawStage();}, snake.stage.conf.fps);
+};
+
+
+/**
+ * Window Load
+ */
+window.onload = function() {
+  var snake = new Game.Snake('stage', {fps: 100, size: 4});
+};
+</script>
+<style>
+body {
+  text-align:center;
+  font-family: helvetica;
+}
+canvas {
+  border: 2px solid rgb(151, 149, 149);
+}
+</style>
+	</head>
+	<body>
+<!--~~~~~~~~~~~~~~~~~~~~~~~Header~~~~~~~~~~~~~~~~~~~~-->
+	<header>
+		<div id="login_menu">
+			<p><a href="login.html"><span class="login-btn">Login</span></a> | <a href="register.html"><span class="login-btn">Register</span></a></p>
+		</div>
+		<a href="Index.html"><img id="logo" src="../Images/logoooo.png" alt="logo" /></a>
+		
+	</header>
+	
+	<!--~~~~~~~~~~~~~~~~~~~~MENU~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<nav>
+		<div id="menudiv">
+			<ul>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="Index.html">Home</a></li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li> <a href="#">Apple</a>
+					<ul>
+						<li><a href="#">Phone</a>
+							<ul>
+								<li><a href="apple_phone_iphone _5_5s.html">Iphone 5/5s</a></li>
+								<li><a href="apple_phone_iphone _6_6s.html">Iphone 6/6s</a></li>
+								<li><a href="apple_phone_iphone _7_8.html">Iphone 7/8</a></li>
+								<li><a href="apple_phone_iphone _x.html">Iphone X</a></li>
+							</ul>
+						</li>
+						<li> <a href="apple_charger.html">Charger</a> </li>
+						<li> <a href="apple_accessories.html">Accessories</a></li>
+						<li> <a href="apple_phone_case.html">Phone Case</a> </li>
+					</ul>
+				</li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="#">Samsung</a>
+					<ul>
+						<li><a href="#">Phone</a>
+							<ul> 
+							
+							<li><a href="Samsung_S5_S6.html">Samsung S5/S6</a></li>
+							<li><a href="Samsung_S7_S8.html">Samsung S7/S8</a> </li>
+							<li><a href="Samsung_Note.html">Samsung Note</a></li>
+							</ul>
+						</li>
+						<li><a href="samsung_charger.html">Charger</a></li>
+						<li><a href="samsung_accessories.html">Accessories</a></li>
+						<li><a href="samsung_phone_case.html">Phone Case</a></li>
+					</ul>
+				</li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="#">HTC</a>
+					<ul>
+						<li><a href="htc_phone.html">Phone</a></li>
+						<li><a href="htc_charger.html">Charger</a></li>
+						<li><a href="htc_accessories.html">Accessories</a></li>
+						<li><a href="htc_phone_case.html">Phone Case</a></li>
+					</ul>
+				</li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="Compare.html">Compare</a>
+					<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+					<li><a href="black_friday.html">Black Friday</a></li>
+				</li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="contact.html">Contact</a></li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+				<li><a href="around_us.html">About Us</a></li>
+				<li><img src="../Images/Nav/NavLine.jpg" height="60px" /></li>
+			</ul>
+		</div>
+	</nav>
+	<!--~~~~~~~~~~~~~~~Content~~~~~~~~~~~~~~~~~-->
+	<div id="content">
+		<div id="contact">
+		
+			<address>
+				<h1 class="dotted"><font face="verdana" size="6" color="black"><p class="dashed">Contact</p></font></h1>
+				<button id="btn2">Show the Data(3 Second)</button>
+			<button id="btn1">Hides the Data(3 Second)</button>
+		<div class="fadee">
+			
+				<p>Bregu i Diellit, p.n.</p>
+				<p>10000 Prishtin&euml;, Republika e Kosov&euml;s</p>
+				<br/>
+				<p><b>Tel.:</b> <i>+381(0)38 554 896 ext.102</i></p>
+				<p><strong>Fax:</strong> <i>+381(0)38 542 525</i></p>
+				<p><strong>E-mail:</strong> <u><a href="mailto:webmaster@mobileshop.com">webmaster@mobileshop.com</a></u></p>
+				<p>
+					<a href="http://fb.com" target="_blank"><img height="40px" width="40px" src="../Images/Social/facebook.png" alt="facebook" /></a>
+					<a href="http://twitter.com" target="_blank"><img height="40px" width="40px" src="../Images/Social/twitter.png" alt="twitter" /></a>
+					<a href="http://plus.google.com" target="_blank"><img height="40px" width="40px" src="../Images/Social/google_plus.png" alt="google plus" /></a>
+				</p>
+		</div>
+			</address>
+			<form id="contact_form">
+					<label>Name:</label>
+					<input type="text" name="sender" placeholder="Enter name">
+					<label>E-Mail:</label>
+					<input type="text" name="sender_e-mail" placeholder="Enter e-mail">
+					<label>Agee:</label>
+					<input id="age" type="text"placeholder="Enter age">
+					<button type="button" onclick="myFunction()">Test Input</button>
+					<p id="message"></p>
+					<label>Message:</label>
+					<textarea placeholder="Write your message here"></textarea>
+				<input id="submit" type="submit" value="Submit"> 
+			</form>
+		</div>
+		<script>
+function myFunction() {
+    var message, x;
+    message = document.getElementById("message");
+    message.innerHTML = "";
+    x = document.getElementById("age").value;
+    try { 
+        if(x == "")  throw "Is empty";
+        if(isNaN(x)) throw "Is not a number";
+        x = Number(x);
+        if(x > 100)   throw "Impossible";
+        if(x < 10)    throw "You are too young";
+    }
+    catch(err) {
+        message.innerHTML = " " + err;
+    }
+    finally {
+        document.getElementById("age").value = "";
+    }
+}
+</script>
+
+	<div>
+			
+				<div id="keyframe_rectangle"></div>
+				<h1 id="grad1">Snake Game</h1>
+	</div>
+<canvas id="stage" height="400" width="520"></canvas>
+
+		 <h4>PRESS THE BUTTON TO SHOW BOOKS WHO TEACH US TO BUILD THIS WEBPAGE </h4>
+		 <p id="ri" ></p>
+<p id="rit"></p>
+<button onclick="libra()">Books to Read</button>
+		<p id="ri" ></p>
+<p id="rit"></p>
+<p>
+  You have viewed this page
+  <span id="count"></span>
+  time(s).
+</p>
+		</div>
+		<script>
+		var library = [ 
+    {
+        title: 'Programming the World Wide Web',
+        author: 'Robert W. Sebesta',
+        readingStatus: true
+    },
+    {
+        title: 'Eloquent JavaScript',
+        author: 'Marijn Haverbeke',
+        readingStatus: false
+    }
+    ];
+function libra()
+{
+for (var i = 0; i < library.length; i++) 
+   {
+    var book = "'" + library[i].title + "'" + ' by ' + library[i].author + ".";
+    if (library[i].readingStatus) {
+document.getElementById("ri").innerHTML="<b>Must read: </b>" + book+"</br>";
+    } else
+    {  
+  document.getElementById("rit").innerHTML="<i>You should read : </i>"  + book+"</br>";
+    }
+   }
+   }
+if (!localStorage.pageLoadCount)
+    localStorage.pageLoadCount = 0;
+  localStorage.pageLoadCount = parseInt(localStorage.pageLoadCount) + 1;
+  document.getElementById('count').textContent = localStorage.pageLoadCount;
+
+
+</script>
+<footer>
+		<div id="footer_bottom">
+			<p>Copyright &copy; Mobile Shop. Designated trademarks and brands are the property of their respective owners.<span id="date"></span></p>
+		<script>
+			document.getElementById("date").innerHTML = Date();
+			getElementById(this.update.bind(this), 1000);
+		</script>
+		</div>
+	</footer>
+</body>
+</html>

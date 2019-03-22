@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>This page is still under construction...</title>
+	<script type="text/javascript">
+		function mesazhi() {
+			alert("Se shpejti me risi ");
+		}
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("button").click(function(){
+        var div = $("div");  
+        div.animate({left: '100px'}, "slow");
+        div.animate({fontSize: '1em'}, "slow");
+    });
+});
+</script> 
+</head>
+<body onload="mesazhi()">
+	<div style="text-align: center">
+	<img src="../Images/workk.jpg" />
+	<style>
+	h1.text_wrap {
+    width: 43em; 
+    border: 2px solid #000000;
+    word-wrap: break-word;
+	background: linear-gradient(to right, gray,black);
+}
+</style>
+	<h1 class="text_wrap">	<svg width="35" height="35">
+  <rect x="50" y="20" width="35" height="35"
+  style="fill:black;stroke:black;stroke-width:5;opacity:0.5" />
+</svg>We are truly sorry, but we have some technical problems.</h1>
+	<h3>We will be back as soon as possible!</h3>
+	
+	<a href="index.html"> &ang;&ang;Click here to go back to the site.</a><br>
+	<p>.</p>
+	<audio controls autoplay loop>
+			  <source src="../audio/111.mp3" type="audio/mpeg" \>
+	</audio>
+	<p>.</p>
+	<div style="background:brown;height:30px;width:150px;position:relative;margin:0 600px;">OFFERINGS<br><br></div>
+	<div><button >Start Animation</button></div>
+	
+	        <p> Write a  price of a product: </p><input type="number" id="VLERA" min="0" max="1000" >
+            <input type="button" id="btn" value="Convert whith sale" onclick="tosqrt()" style="padding: 5px; margin: 10px 0px;">
+			<p>price of product whith sale  is: <span id="sqrt_num"></span></p>
+			
+			<br/>
+			<p>Write a number  and we will reverse the input !</p>
+			<input type="number" id="num_rev" min="0" max="1000" > <span id="reversed_number"></span>
+			<input type="button" id="btn_id" value="Reverse" onclick="reverse()" style="padding: 5px; margin: 10px 0px; ">
+			<br/>
+			
+			<p ">Special discount offer for these occupations, write the number 1 for doctors, 2 for Firefighter, 3 for undertaker  , 4 for religious clerics ,5 for engineers,6 for Hippotherapist choose one</p><button onclick="myFunction()">NUMBERS TO BE PRESSED</button>
+			 <p id="demo"></p>
+			<input type="number" id="nr" min="1" max="5" step="1">
+			<input type="button" id="btn" value="SHOW DISCOUNT" onclick="mathKon()" style="padding: 5px; margin: 10px 0px; ">
+			<p id="your_constant"></p>
+			<br/>
+			<p> Write a price which is decimal: </p><input type="" id="dec_num" min="0" max="100" step="0.1">
+			<input type="button" id="btn_id" value="To Exponential" onclick="toExp()" style="padding: 5px; margin: 10px 0px; ">
+			<p>Your price  to exponential is: <span id="exp_num"></span></p>
+			<p>The maximum number allowed is: <span id="max_num"></span></p>
+			<br/>
+			<p>Write your name and your ID number , if you are registered before to get discount even today, To get dicount you definitely need to enter name and ID</p>
+			<input type="text" id="field" />
+
+<input type="button" value="Save" id="save" />
+<input type="button" value="Read" id="read" />
+<input type="button" value="Clear" id="clear" />
+     <button onclick="myFunction()">Important Note </button>
+      <p id="tyt"></p>
+	</div>
+	 
+	<script>
+function tosqrt() {
+					var x = document.getElementById("VLERA").value;
+					var n=document.getElementById("sqrt_num").innerHTML =x- Math.sqrt(x);
+					 
+      
+
+	    
+				}
+				
+				function reverse() {
+				
+					var x = document.getElementById("num_rev").value;
+					var y = x.toString();
+					
+					var z = y.split("").reverse().join("");
+					var result = Number(z);
+				
+					document.getElementById("reversed_number").innerHTML = result;
+					
+				}
+				
+				
+				
+					
+					function mathKon() {
+					
+					var constants = document.getElementById("nr").value;
+				
+				var result;
+					switch(parseInt(constants)) {
+						case 1:
+							result =Math.round((1/ Math.PI)*100);
+							break;
+							case 2:
+							result = Math.floor((1/Math.E)*100);
+							break;
+						case 3:
+							result = Math.ceil((Math.LOG10E)*100);
+							break;
+						case 4:
+							result =Math.floor( Math.LN2*100)-20;
+							break;
+						case 5:
+							result =Math.round( Math.SQRT1_2*100)-20;
+							break;
+							case 6:
+							result =Math.abs((exp(2,3)/(-10))*100)-20;
+							break;
+						default:
+							result = alert("Enter e number from 1 to 6 to see discount whith ");
+					}
+					
+					document.getElementById("your_constant").innerHTML = result+"%";
+				}
+				function exp(b,n)
+{
+        var ans = 1;
+        for (var i =1; i <= n; i++)
+		
+		
+        {
+		ans = b * ans;        
+        }
+        return ans;
+		
+}
+function toExp() {
+					var x = document.getElementById("dec_num").value;
+					document.getElementById("exp_num").innerHTML = parseFloat(x).toExponential(3);
+					document.getElementById("max_num").innerHTML = Number.MAX_VALUE;
+				}
+
+function myFunction() {
+    var str = "Special discount offer for these occupations, write the number 1 for doctors, 2 for Firefighter, 3 for undertaker  , 4 for religious clerics ,5 for engineers,6 for Hippotherapist"; 
+    var rehagel = /\d/g;
+    var result = str.match(rehagel);
+    document.getElementById("demo").innerHTML = result;
+	
+}
+ var t = new Date().getHours();
+if (t < 10) {
+    document.write("Have a good morning!");
+    document.body.style.backgroundColor="#FFE4C4";
+} else if (t < 17) {
+    document.write("Have a good evening!");
+    document.body.style.backgroundColor="#B0E0E6";
+} else {
+    document.write("Have a good night!");
+    document.body.style.backgroundColor="#90EE90";
+}
+
+
+  if (!localStorage.pageLoadCount)
+    localStorage.pageLoadCount = 0;
+  localStorage.pageLoadCount = parseInt(localStorage.pageLoadCount) + 1;
+  document.getElementById('count').textContent = localStorage.pageLoadCount;
+
+
+
+
+var field = document.getElementById("field"),
+    save = document.getElementById("save"),
+    read = document.getElementById("read"),
+    clear = document.getElementById("clear");
+ 
+// Manage Save event
+save.addEventListener("click", function(e){
+    window.sessionStorage["fieldval"] = field.value;
+}, true);
+
+// Manage Read Event
+read.addEventListener("click", function(e){
+    alert(window.sessionStorage["fieldval"]);
+}, true);
+
+// Manage clear event
+clear.addEventListener("click", function(e){
+    window.sessionStorage.clear();
+}, true);
+	
+function myFunction() {
+    var str = "To get dicount you definitely need to enter name and ID";
+    var v = /ID$/g;
+    var result = str.match(v);
+    document.getElementById("tyt").innerHTML ="Press right:"+ result;
+}	
+</script>
+</body>
+</html>

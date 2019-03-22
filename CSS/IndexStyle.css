@@ -1,0 +1,368 @@
+/*_________HEADER___________*/
+header {
+	top: 0px;
+	display: block;
+	z-index: +1;
+	position: fixed;
+	height: 122px;
+	width: 100%;
+	background: #DCDCDC;
+	padding: 0 0 0 0;
+}
+html,body {
+	width: 100%;
+	height: auto;
+	padding: 0;
+	margin: 0;
+	background-image: url(../Images/smbg.png);
+	background-repeat: x;
+	background-attachment: fixed;
+	background-position: left;
+}
+img{
+	z-index: -1;
+	display:inline-flex; 
+}
+#logo {
+	position: absolute;
+	float: left;
+	padding: 10px 0px 10px 15px;
+	
+}
+#login_menu {
+	color: black;
+	padding: 0;
+	text-align: center;
+	margin-right: 100px;
+	width: 190px;
+	height: 50px;
+	float: right;
+	background-color: #DCDCDC;
+	border-radius: 15px 15px 15px 15px;
+	border: 2px;
+	border-color: #000000;
+	border-style: solid;
+	margin-top: 10px;
+}
+.login-btn {
+	color: black;
+	font-weight: bolder;
+	
+}
+#login-btn:hover {
+	color: 	border-color:#000000;
+	font-weight: bolder;
+	text-decoration: underline;
+	-webkit-transform: rotateY(180deg); /* Safari */
+    transform: rotateY(180deg);
+}
+
+/*~~~~~~~~~~~~MAIN MENU~~~~~~~~~~~~~~~~~ */
+
+nav {
+	top:123px;
+	position: fixed;
+	z-index: +3;
+	display: block;
+	color: #000000;
+	background: #DCDCDC;
+	height: 60px;
+	width: 100%;
+	margin: 0; 
+	box-shadow: 0px 0px 0px 2px #000000;
+}
+
+#menudiv {
+	font-family: Lato-Light;
+	font-family:'Lato-Light';
+	font-weight: bold;
+	width: 1000px;
+	padding-left: 30px;
+	margin: 0 auto;
+	background-color: #DCDCDC;
+	height: auto;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	font-family: 'Lato', sans-serif;
+
+	font-size: 21px;
+	list-style: none;
+	height: auto;
+	padding: 0;
+	margin: 0;
+	color: #DCDCDC;
+	background: #DCDCDC;
+}
+
+ul li {
+	display: block;
+	position: relative;
+	float: left;
+	height: 60px;
+	vertical-align: center;
+	color: #d8d8da;
+	background: #DCDCDC;
+}
+
+li ul {
+	display: none;
+}
+nav div ul {
+	font-family: 'Lato', sans-serif;
+	font-weight: bold;
+	font-size: 21px;
+	list-style: none;
+	height: auto;
+	padding: 0;
+	margin: 0;
+	color: #d8d8da;
+	background: #1a2329;
+}
+ul li a {
+	display: block;
+	margin-top: 3px;
+	padding: 0.7em;
+	font-family: 'Lato', sans-serif;
+	font-weight: bolder;
+	font-size: 21px;
+	white-space: nowrap;
+	color: #000000;
+}
+
+ul:hover a {
+	color: #000000;
+	
+}
+
+ul li a:hover {
+	color: #000000;
+}
+
+li:hover > ul {
+	display: block;
+	position: absolute;
+}
+
+li:hover li {
+	float: none;
+}
+
+li:hover a {
+	color: black;
+}
+
+li:hover li a:hover {
+	color: #000000;
+/*	border-bottom: 4px;*/
+	background-color:#000000;
+	border-bottom-style: solid;
+	border-bottom-color: #000000;
+	background-image: linear-gradient(#1a2329 1%, #0188ae 140%)
+}
+
+ul ul ul {
+	left: 100%;
+	top: 0;
+}
+
+
+/*~~~~~~~~~The Carousel~~~~~~~~~~*/
+#imgback{
+	position: relative;	
+	display: block;
+	z-index: -7;
+}
+.textoverdiv {
+	position: absolute;
+	font-family: 'Lato', sans-serif;
+	font-weight: bolder;
+	font-size: 50px;
+	text-transform: uppercase;
+	text-align: center;
+	color: white;
+	margin: 0px;
+	padding: 45px;
+	border: 3px;
+	border-style: double;
+	border-color: white;
+	top: 40%;
+	left: 35%;
+	bottom: 46%;
+	right: 35%;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#carousel {
+	position: relative;
+	margin-top: 184px;
+	padding: 0;
+	width: 100%;
+	height: auto;
+	width: 100%;
+	line-height: 0;
+}
+
+#carouselImg {
+	width: inherit;
+}
+
+.smalldiv {
+	overflow: auto;
+	width: 100%;
+	display: inline;
+}
+
+img {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+#smallcarousel {
+	
+	
+	padding: 0;
+	margin-bottom: 0;
+	margin-top: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	line-height: 0;
+	
+}
+
+figcaption {
+	position: absolute;
+	font-family: 'Lato', sans-serif;
+	font-weight: bolder;
+	font-size: 28px;
+	text-transform: uppercase;
+	text-align: center;
+	color: white;
+	margin: 0px;
+	padding: 28px;
+	border: 3px;
+	border-style: double;
+	border-color: white;
+	left: 10%;
+	top: 35%;
+	right: 10%;
+	bottom: 35%;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+figure {
+	float: left;
+	position: relative;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	width: 25%;
+	height: 100%;
+}
+
+.imgSmallCarousel {
+	overflow: hidden;
+	width: inherit;
+	height: inherit;
+	z-index: -1;
+}
+
+#mapss{
+    margin: 20px;
+    border: 2px solid green;
+    outline: 2px solid black;
+    outline-offset: 15px;
+} 
+
+/*~~~~~~~~~~Video~~~~~~~~~~~~ */
+
+video{
+	padding: 0;
+	margin: 0;
+	
+	
+}
+
+}
+
+
+/* --------- FOOTER ------------*/
+
+
+footer {
+	background-image: url(../Images/contact_bg.png), url(../Images/bg1.jpg);
+	background-repeat: no-repeat, no-repeat;
+	background-position: right bottom, left top;
+	background-origin: padding-box, border-box;
+	background-size: 150px, 100%;
+	width: 100%;
+	height: 460px;
+	margin: auto;
+}
+#contact:hover{
+	/* 2D Translate */
+	-ms-transform: translate(30px, 10px); /* IE 9 */
+    -webkit-transform: translate(5px, 10px); /* Safari */
+    transform: translate(50px, 10px);
+}
+.neww:hover{
+	/* 2D Scale */
+	-ms-transform: scale(1.1, 1.1); /* IE 9 */
+    -webkit-transform: scale(1.1, 1.1); /* Safari */
+    transform: scale(1.1, 1.1);
+}
+/*Scew*/
+#mapss:hover{
+		-ms-transform: skew(20deg, 3deg); /* IE 9 */
+    -webkit-transform: skew(20deg, 3deg); /* Safari */
+    transform: skew(20deg, 3deg);
+}
+
+
+#back_top {
+	position: fixed;
+	right: 10px;
+	bottom: 15px;
+	z-index: 3;
+}
+
+address {
+	width: 320px;
+	padding-top: 50px;
+	margin-left: 100px;
+	margin-bottom: 40px;
+}
+
+map {
+	position: relative;
+	width: 500px;
+	height: 300px;
+	display: block;
+	margin-top:-330px;
+	margin-left: 655px;
+	margin-bottom: 50px;
+}
+
+
+
+#footer_bottom {
+	outline:inherit;
+	outline-color: black;
+	outline-offset: inherit;
+	outline-style: solid;
+	outline-width: thin;	
+	width: 98%;
+	height: 50px;
+	color: black;
+	padding-left: 2%;
+	background-color: #DCDCDC;
+	float: left;
+	position: absolute;
+}
